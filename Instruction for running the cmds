@@ -1,0 +1,18 @@
+#First we need to install docker
+
+yum install docker-ce
+
+systemctl enable --now docker
+
+vim Dockerfile
+FROM centos:latest
+RUN yum install firefox -y
+CMD ["/usr/bin/firefox"]
+
+docker build -t docker-gui-firefox .
+
+docker images
+
+docker run -it --name=gui --env='DISPLAY' --net=host docker-gui-firefox
+
+#firefox will run in graphical mode
